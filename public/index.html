@@ -9,16 +9,30 @@
     <script src="bundle.js"></script>
 </head>
 <body>
+    <textarea id="json" name="json" rows="5" cols="33">
+        {
+            "name": "Test"
+        }
+    </textarea>
+
+    <textarea id="template" name="template" rows="5" cols="33">
+        - Hello ${name}!
+    </textarea>
+
+    <button onclick="validate()">Validate!</button>
+
+    <textarea id="result" disabled rows="5" cols="20"></textarea>
+
     <script>
-        // Pass from Template section of the UI
-        const template = "- Hello ${name}!";
+        function validate()
+        {
+            const json = document.getElementById("json").value;
+            const template = document.getElementById("template").value;
 
-        // Pass from Object / JSON section of the UI
-        const objectToPass = {
-            name: "Test"
-        };
+            const result = validateLG(template, JSON.parse(json));
 
-        alert(validateLG(template, objectToPass))
+            document.getElementById("result").value = result;
+        }
     </script>
 </body>
 </html>
